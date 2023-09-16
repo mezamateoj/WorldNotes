@@ -25,21 +25,21 @@ noteSchema.set('toJSON', {
 })
 
 // convert schema to model (modelName, schema)
-const Note = mongoose.model('Tour', noteSchema)
+const Note = mongoose.model('Notes', noteSchema)
 
 
-// create a new tour 
-const tour = new Note({
-    cityName: 'Madrid',
-    date: '023-09-14T23:35:41.933Z',
-    note: 'This is a note'
-})
+// // create a new tour 
+// const tour = new Note({
+//     cityName: 'Madrid',
+//     date: '023-09-14T23:35:41.933Z',
+//     note: 'This is a note'
+// })
 
-// save the tour to the db
-tour.save().then(result => {
-    console.log(result)
-    console.log('City saved!')
-    mongoose.connection.close()
-})
+// // save the tour to the db
+// tour.save().then(result => {
+//     console.log(result)
+//     console.log('City saved!')
+//     mongoose.connection.close()
+// })
 
 module.exports = Note;

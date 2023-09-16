@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
-const tourRouter = require('./routes/tourRoutes')
+const noteRouter = require('./routes/noteRoutes')
 
 
 // 1) MIDDLEWARES
@@ -10,7 +10,7 @@ app.use(morgan('dev'))
 app.use(express.json())
 
 // mounting the routers
-app.use('/tours', tourRouter);
+app.use('/notes', noteRouter);
 
 
 

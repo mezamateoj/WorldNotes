@@ -1,29 +1,6 @@
 {
   "cities": [
     {
-      "cityName": "Madrid",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "date": "2027-07-15T08:22:53.976Z",
-      "notes": "",
-      "position": {
-        "lat": 40.46635901755316,
-        "lng": -3.7133789062500004
-      },
-      "id": 17806751
-    },
-    {
-      "cityName": "Valladolid",
-      "country": "Spain",
-      "date": "2023-09-12T22:13:09.043Z",
-      "notes": "test",
-      "position": {
-        "lat": "41.623655390686395",
-        "lng": "-4.696655273437501"
-      },
-      "id": 98443201
-    },
-    {
       "cityName": "Portalegre",
       "country": "Portugal",
       "date": "2023-09-12T23:46:09.511Z",
@@ -33,17 +10,6 @@
         "lng": "-7.393798828125001"
       },
       "id": 98443203
-    },
-    {
-      "cityName": "Quito",
-      "country": "Ecuador",
-      "date": "2023-09-14T23:25:31.655Z",
-      "notes": "una mierda\n",
-      "position": {
-        "lat": "-0.23058033522462568",
-        "lng": "-78.49594116210939"
-      },
-      "id": 98443206
     },
     {
       "cityName": "Sigchos",

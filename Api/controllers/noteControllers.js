@@ -1,26 +1,26 @@
-const Tour = require('../models/tourModel')
+const Note = require('../models/notesModel')
 
 
 // body middleware
 const checkBody = (req, res, next) => {
-    if (!req.body.name || !req.body.price) {
+    if (!req.body.cityName || !req.body.note) {
         return res.status(400).json({
             status: 'fail',
-            message: 'missing name or price'
+            message: 'missing city or note'
         })
     }
     next()
 }
 
-// get all tours controller
-const getAllTours = async (req, res) => {
+// get all Notes controller
+const getAllNotes = async (req, res) => {
     try {
-        const tours = await Tour.find()
+        const Notes = await Note.find()
         res.status(200).json({
             status: 'success',
-            results: tours.length,
+            results: Notes.length,
             data: {
-                tours
+                Notes
             }
         })
     } catch (error) {
@@ -31,16 +31,16 @@ const getAllTours = async (req, res) => {
     }
 }
 
-// get tour by id controller
-const getTourById = async (req, res) => {
+// get Note by id controller
+const getNoteById = async (req, res) => {
     const { id } = req.params
     try {
-        // same as Tour.findOne{{_id: id}}
-        const tour = await Tour.findById(id)
+        // same as Note.findOne{{_id: id}}
+        const Note = await Note.findById(id)
         res.status(200).json({
             status: 'success',
             data: {
-                tour
+                Note
             }
         })
     } catch (error) {
@@ -51,14 +51,14 @@ const getTourById = async (req, res) => {
     }
 }
 
-// create tour controller
-const createTour = async (req, res) => {
+// create Note controller
+const createNote = async (req, res) => {
     try {
-        const newTour = await Tour.create(req.body)
+        const newNote = await Note.create(req.body)
         res.status(201).json({
             status: 'success',
             data: {
-                tour: newTour
+                Note: newNote
             }
         })
 
@@ -70,11 +70,11 @@ const createTour = async (req, res) => {
     }
 }
 
-// update tour using id controller
-const updateTour = async (req, res) => {
+// update Note using id controller
+const updateNote = async (req, res) => {
     const { id } = req.params
     try {
-        const tour = await Tour.findByIdAndUpdate(id, req.body, {
+        const Note = await Note.findByIdAndUpdate(id, req.body, {
             new: true,
             runValidators: true
         })
@@ -82,7 +82,7 @@ const updateTour = async (req, res) => {
         res.status(200).json({
             status: 'success',
             data: {
-                tour
+                Note
             }
         })
 
@@ -94,11 +94,11 @@ const updateTour = async (req, res) => {
     }
 }
 
-// delete tour controller
-const deleteTour = async (req, res) => {
+// delete Note controller
+const deleteNote = async (req, res) => {
     const { id } = req.params
     try {
-        await Tour.findByIdAndDelete(id)
+        await Note.findByIdAndDelete(id)
         res.status(204).json({
             status: 'success',
             message: `User ${id} deleted`
@@ -115,10 +115,10 @@ const deleteTour = async (req, res) => {
 
 
 module.exports = {
-    getAllTours,
-    getTourById,
-    createTour,
-    updateTour,
-    deleteTour,
+    getAllNotes,
+    getNoteById,
+    createNote,
+    updateNote,
+    deleteNote,
     checkBody
 };
