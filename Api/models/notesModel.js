@@ -6,13 +6,24 @@ const noteSchema = new mongoose.Schema({
         type: String,
         required: [true, 'A tour must have a city name!'],
     },
+    country: {
+        type: String,
+    },
+    countryCode: {
+        type: String,
+    },
     date: {
         type: String,
         required: [true, 'A tour must have a date!'],
     },
-    note: {
+    notes: {
         type: String,
-    }
+    },
+    position: {
+        type: Object,
+        required: [true, 'A tour must have a position!'],
+    },
+
 })
 
 

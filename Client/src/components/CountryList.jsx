@@ -14,7 +14,11 @@ function CountryList() {
 		if (!acc.map((c) => c.country).includes(city.country)) {
 			return [
 				...acc,
-				{ country: city.country, id: city.id, emoji: city.emoji },
+				{
+					country: city.country,
+					id: city.id,
+					countryCode: city.countryCode,
+				},
 			];
 		} else {
 			return acc;

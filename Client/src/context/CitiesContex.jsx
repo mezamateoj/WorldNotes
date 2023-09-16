@@ -76,8 +76,9 @@ export function CitiesProvider({ children }) {
 			try {
 				// setLoading(true);
 				dispatch({ type: 'loading' });
-				const response = await fetch(`${BASE_URL}/cities`);
+				const response = await fetch(`${BASE_URL}/notes`);
 				const data = await response.json();
+				console.log(data);
 				// setCities(data);
 				dispatch({ type: 'cities/loaded', payload: data });
 			} catch (error) {
@@ -92,11 +93,12 @@ export function CitiesProvider({ children }) {
 	}, []);
 
 	async function fetchCity(id) {
+		console.log(id);
 		if (Number(id) === currentCity.id) return;
 		try {
 			// setLoading(true);
 			dispatch({ type: 'loading' });
-			const response = await fetch(`${BASE_URL}/cities/${id}`);
+			const response = await fetch(`${BASE_URL}/notes/${id}`);
 			const data = await response.json();
 			console.log(data);
 			dispatch({ type: 'city/loaded', payload: data });
@@ -115,7 +117,7 @@ export function CitiesProvider({ children }) {
 		try {
 			// setLoading(true);
 			dispatch({ type: 'loading' });
-			const response = await fetch(`${BASE_URL}/cities/`, {
+			const response = await fetch(`${BASE_URL}/notes/`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -141,7 +143,7 @@ export function CitiesProvider({ children }) {
 		try {
 			// setLoading(true);
 			dispatch({ type: 'loading' });
-			await fetch(`${BASE_URL}/cities/${id}`, {
+			await fetch(`${BASE_URL}/notes/${id}`, {
 				method: 'DELETE',
 			});
 			dispatch({ type: 'cities/deleted', payload: id });

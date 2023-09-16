@@ -30,6 +30,7 @@ function Form() {
 	console.log(lat, lng);
 	const [cityName, setCityName] = useState('');
 	const [country, setCountry] = useState('');
+	const [countryCode, setCountryCode] = useState('');
 	const [date, setDate] = useState(new Date());
 	const [notes, setNotes] = useState('');
 	const [geoLoading, setGeoLoading] = useState(false);
@@ -45,6 +46,7 @@ function Form() {
 					`${BASE_URL}?latitude=${lat}&longitude=${lng}`
 				);
 				const data = await response.json();
+				console.log(data);
 				if (!data.countryCode) {
 					throw new Error(
 						'That location is not valid. Click on the map to select a valid location.'
@@ -52,6 +54,7 @@ function Form() {
 				}
 				setCityName(data.city || data.locality || '');
 				setCountry(data.countryName || '');
+				setCountryCode(data.countryCode || '');
 				console.log(data);
 			} catch (error) {
 				console.log(error.message);
@@ -82,6 +85,7 @@ function Form() {
 		const newCity = {
 			cityName,
 			country,
+			countryCode,
 			date,
 			notes,
 			position: {
