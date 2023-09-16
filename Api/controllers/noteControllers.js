@@ -58,6 +58,7 @@ const createNote = async (req, res) => {
 // update Note using id controller
 const updateNote = async (req, res) => {
     const { id } = req.params
+    console.log(req.body)
     try {
         const note = await Note.findByIdAndUpdate(id, req.body, {
             new: true,

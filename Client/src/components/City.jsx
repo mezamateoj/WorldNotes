@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import Spinner from './Spinner';
 import { useCities } from '../context/CitiesContex';
 import BackButton from './BackButton';
+import Button from './Button';
+import EditNotes from './EditNotes/EditNotes';
 
 const formatDate = (date) =>
 	new Intl.DateTimeFormat('en', {
@@ -14,9 +16,12 @@ const formatDate = (date) =>
 	}).format(new Date(date));
 
 function City() {
+	const [edit, setEdit] = useState(false);
+	const [editNotes, setEditNotes] = useState('');
+
 	// get the id from the URL
 	const { id } = useParams();
-	const { fetchCity, currentCity, loading } = useCities();
+	const { fetchCity, currentCity, loading, editCity } = useCities();
 
 	useEffect(() => {
 		fetchCity(id);
@@ -26,15 +31,26 @@ function City() {
 
 	if (loading) return <Spinner />;
 
+	const handleEdit = () => {
+		setEdit(!edit);
+	};
+
+	const handleConfirm = () => {
+		const newNotes = {
+			id: id,
+			notes: editNotes,
+		};
+		editCity(newNotes);
+		setEdit(!edit);
+	};
+
+	console.log(editNotes);
+
 	return (
 		<div className={styles.city}>
 			<div className={styles.row}>
-				<h6>
-					{cityName}, {country} {}
-				</h6>
-				<h3>
-					<span>{emoji}</span> {cityName}
-				</h3>
+				<h3>{country}</h3>
+				<h2>{cityName}</h2>
 			</div>
 
 			<div className={styles.row}>
@@ -45,7 +61,13 @@ function City() {
 			{notes && (
 				<div className={styles.row}>
 					<h6>Your notes</h6>
-					<p>{notes}</p>
+					{edit ? (
+						<EditNotes notes={editNotes} setNotes={setEditNotes} />
+					) : (
+						<p>{notes}</p>
+					)}
+					{/* <p>{notes}</p>
+					<EditNotes /> */}
 				</div>
 			)}
 
@@ -60,8 +82,17 @@ function City() {
 				</a>
 			</div>
 			<div></div>
-			<div>
+			<div className={styles.btnContainer}>
 				<BackButton />
+				{edit ? (
+					<Button type="primary" onClick={handleConfirm}>
+						Confirm
+					</Button>
+				) : (
+					<Button type="primary" onClick={handleEdit}>
+						Edit
+					</Button>
+				)}
 			</div>
 		</div>
 	);

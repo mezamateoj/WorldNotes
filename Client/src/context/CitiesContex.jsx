@@ -43,6 +43,20 @@ function reducer(state, action) {
 				loading: false,
 				cities: [...state.cities, action.payload],
 			};
+		case 'cities/edited':
+			return {
+				...state,
+				loading: false,
+				cities: state.cities.map((city) =>
+					city.id === action.payload.id
+						? { ...city, notes: action.payload.notes }
+						: city
+				),
+				currentCity: {
+					...state.currentCity,
+					notes: action.payload.notes,
+				},
+			};
 		case 'cities/deleted':
 			return {
 				...state,
@@ -139,6 +153,33 @@ export function CitiesProvider({ children }) {
 		}
 	}
 
+	async function editCity(newNotes) {
+		try {
+			// setLoading(true);
+			dispatch({ type: 'loading' });
+			const { id, notes } = newNotes;
+			console.log(newNotes);
+			await fetch(`${BASE_URL}/notes/${id}`, {
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ notes }),
+			});
+			dispatch({ type: 'cities/edited', payload: newNotes });
+
+			// setCities(cities.filter((city) => city.id !== id));
+			// setCurrentCity(data);
+		} catch (error) {
+			console.log(error.message);
+			dispatch({
+				type: 'rejected',
+				payload: 'There was an error. Please try again later.',
+			});
+			// alert('There was an error. Please try again later.');
+		}
+	}
+
 	async function deleteCity(id) {
 		try {
 			// setLoading(true);
@@ -168,6 +209,7 @@ export function CitiesProvider({ children }) {
 				currentCity,
 				fetchCity,
 				createCity,
+				editCity,
 				deleteCity,
 			}}
 		>
