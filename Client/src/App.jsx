@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage';
 import Product from './pages/Product';
 import Pricing from './pages/Pricing';
 import NotFound from './pages/NotFound';
@@ -12,6 +11,7 @@ import Form from './components/Form';
 import { CitiesProvider } from './context/CitiesContex';
 import { AuthProvider } from './context/FakeAuthContext';
 import ProtectedRoute from './pages/ProtectedRoute';
+import Home from './pages/Home';
 
 function App() {
 	return (
@@ -19,7 +19,7 @@ function App() {
 			<AuthProvider>
 				<CitiesProvider>
 					<Routes>
-						<Route path="/" element={<HomePage />} />
+						<Route path="/" element={<Home />} />
 						<Route path="/product" element={<Product />} />
 						<Route path="/pricing" element={<Pricing />} />
 						<Route path="/login" element={<Login />} />
