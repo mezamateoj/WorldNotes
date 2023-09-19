@@ -1,14 +1,9 @@
-import {
-	createContext,
-	useContext,
-	useEffect,
-	useReducer,
-	useState,
-} from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
 
 export const CitiesContext = createContext();
 
-const BASE_URL = 'http://localhost:8000';
+// const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://worldnotes-production.up.railway.app';
 
 const initialState = {
 	cities: [],
@@ -92,7 +87,6 @@ export function CitiesProvider({ children }) {
 				dispatch({ type: 'loading' });
 				const response = await fetch(`${BASE_URL}/notes`);
 				const data = await response.json();
-				console.log(data);
 				// setCities(data);
 				dispatch({ type: 'cities/loaded', payload: data });
 			} catch (error) {
@@ -107,14 +101,13 @@ export function CitiesProvider({ children }) {
 	}, []);
 
 	async function fetchCity(id) {
-		console.log(id);
 		if (Number(id) === currentCity.id) return;
 		try {
 			// setLoading(true);
 			dispatch({ type: 'loading' });
 			const response = await fetch(`${BASE_URL}/notes/${id}`);
 			const data = await response.json();
-			console.log(data);
+
 			dispatch({ type: 'city/loaded', payload: data });
 			// setCurrentCity(data);
 		} catch (error) {
@@ -139,7 +132,7 @@ export function CitiesProvider({ children }) {
 				body: JSON.stringify(newCity),
 			});
 			const data = await response.json();
-			console.log(data);
+
 			dispatch({ type: 'city/created', payload: data });
 			// setCities([...cities, data]);
 			// setCurrentCity(data);
@@ -158,7 +151,7 @@ export function CitiesProvider({ children }) {
 			// setLoading(true);
 			dispatch({ type: 'loading' });
 			const { id, notes } = newNotes;
-			console.log(newNotes);
+
 			await fetch(`${BASE_URL}/notes/${id}`, {
 				method: 'PATCH',
 				headers: {

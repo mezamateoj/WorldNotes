@@ -44,8 +44,6 @@ function City() {
 		setEdit(!edit);
 	};
 
-	console.log(editNotes);
-
 	return (
 		<div className={styles.city}>
 			<div className={styles.row}>

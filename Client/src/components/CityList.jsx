@@ -7,7 +7,7 @@ import { useCities } from '../context/CitiesContex';
 
 function CityList() {
 	const { cities, loading } = useCities();
-	console.log(cities);
+
 	if (loading) return <Spinner />;
 	if (!cities.length) return <Message message="No cities found" />;
 	return (

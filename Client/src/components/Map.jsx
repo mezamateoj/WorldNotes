@@ -35,7 +35,6 @@ function Map() {
 	}, [lat, lng]);
 
 	useEffect(() => {
-		console.log(geoLocation);
 		if (geoLocation) {
 			setPosition([geoLocation.lat, geoLocation.lng]);
 		}
